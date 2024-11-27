@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:07:55 by lserodon          #+#    #+#             */
-/*   Updated: 2024/11/22 15:37:01 by lserodon         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:33:05 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_length(int n)
+static int	ft_length(int n)
 {
 	int			i;
 	long int	big_n;
