@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 09:57:05 by lserodon          #+#    #+#             */
-/*   Updated: 2025/01/09 15:47:39 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:42:52 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+size_t	ft_strlen_until(char *str, int c)
 {
-	int		i;
-	int		j;
-	char	*str;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	if (!s1)
-		return (NULL);
-	if (!s2)
-		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1, '\0') + ft_strlen(s2, '\0')
-				+ 1));
 	if (!str)
-	{
-		free(s1);
-		return (NULL);
-	}
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(s1);
-	return (str);
+		return (0);
+	while (str[i] != c && str[i])
+		i++;
+	if (str[i] == '\n')
+		i++;
+	return (i);
 }
 
 void	fill_stash(char *buffer, char *stash)
@@ -90,17 +75,17 @@ char	*fill_line(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	stash[OPEN_MAX][BUFFER_SIZE + 1];
+	static char	stash[BUFFER_SIZE + 1];
 	char		*line;
 	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || OPEN_MAX <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = fill_line(fd, stash[fd]);
-	fill_stash(buffer, stash[fd]);
-	line = ft_substr(buffer, 0, ft_strlen(buffer, '\n'));
+	buffer = fill_line(fd, stash);
+	fill_stash(buffer, stash);
+	line = ft_substr(buffer, 0, ft_strlen_until(buffer, '\n'));
 	free(buffer);
-	if (!ft_strlen(line, '\0'))
+	if (!ft_strlen_until(line, '\0'))
 	{
 		free(line);
 		return (NULL);

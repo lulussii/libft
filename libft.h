@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:33:47 by lserodon          #+#    #+#             */
-/*   Updated: 2024/11/22 09:32:04 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:49:00 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-// FONCTIONS OBLIGATOIRES
+/* ------ FONCTIONS ------ */
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -44,7 +44,7 @@ char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *src);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *str);
@@ -58,13 +58,15 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 
-// FONCTIONS BONUS
+/* ------ STRUCTURE ------ */
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+/* ------ FONCTIONS BONUS ------ */
 
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
@@ -76,5 +78,12 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
+
+/* ------ GET NEXT LINE ------ */
+
+# ifndef BUFFER_SIZE
+#define BUFFER_SIZE 10
+
+#endif
 
 #endif

@@ -36,6 +36,7 @@ SRCS = ft_atoi.c\
 	ft_strmapi.c\
 	ft_striteri.c\
 	ft_split.c\
+	get_next_line.c
 
 SRCS_BONUS = ft_lstnew_bonus.c\
 		ft_lstdelone_bonus.c\
@@ -47,38 +48,31 @@ SRCS_BONUS = ft_lstnew_bonus.c\
 		ft_lstsize_bonus.c\
 		ft_lstmap_bonus.c\
 
-SRCS_GNL =	get_next_line/get_next_line.c\
-			get_next_line/get_next_line_bonus.c\
-			get_next_line/get_next_line_utils.c\
-			get_next_line/get_next_line_utils_bonus.c
 
-OBJDIR = objs
-OBJ = $(SRCS:.c=$(OBJDIR)/%.o)
-OBJ_BONUS = $(SRCS_BONUS:.c=$(OBJDIR)/%.o)
-OBJ_GNL = $(SRCS_GNL:.c=$(OBJDIR)/%.o)
+OBJS_DIR = objs
+OBJ = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+OBJ_BONUS = $(SRCS_BONUS:.c=.o)
 
-$(OBJDIR)/%.o: %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJ_GNL) libft.h get_next_line/get_next_line.h Makefile
-	ar rcs $(NAME) $(OBJ) $(OBJ_GNL)
+$(NAME): $(OBJ) libft.h Makefile
+	@ar rcs $(NAME) $(OBJ)
 
 bonus : .bonus
 
-.bonus: $(OBJ) $(OBJ_BONUS) $(OBJ_GNL) libft.h gnl/get_next_line.h
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_GNL)
-	touch .bonus
+.bonus: $(OBJ) $(OBJ_BONUS) libft.h
+	@ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
+	@touch .bonus
 
 clean:
-	rm -rf $(OBJDIR)
+	@rm -rf $(OBJS_DIR)
 
 fclean:	clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re:	fclean all
 
