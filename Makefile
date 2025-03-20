@@ -1,6 +1,6 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 SRCS = ft_atoi.c\
 	ft_isalnum.c\
 	ft_isalpha.c\
@@ -36,7 +36,9 @@ SRCS = ft_atoi.c\
 	ft_strmapi.c\
 	ft_striteri.c\
 	ft_split.c\
-	get_next_line.c
+	get_next_line.c\
+	ft_printf.c\
+	ft_printf_utils.c\
 
 SRCS_BONUS = ft_lstnew_bonus.c\
 		ft_lstdelone_bonus.c\

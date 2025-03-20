@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:33:47 by lserodon          #+#    #+#             */
-/*   Updated: 2025/02/21 12:49:00 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:25:21 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define LIBFT_H
 
 # include <ctype.h>
+# include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <limits.h>
 
 /* ------ FONCTIONS ------ */
 
@@ -82,8 +82,22 @@ int					ft_lstsize(t_list *lst);
 /* ------ GET NEXT LINE ------ */
 
 # ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10
+#  define BUFFER_SIZE 10
 
-#endif
+# endif
+
+char				*fill_line(int fd, char *stash);
+char				*get_next_line(int fd);
+size_t				ft_strlen_until(char *str, int c);
+
+/* ----- FT_PRINTF ----- */
+
+int					ft_printchar(int c);
+int					ft_printstr(char *str);
+int					ft_printf(const char *format, ...);
+int					ft_printnbr_base(long int nb, char *base, int base_size);
+int					ft_printnbr_p(unsigned long int nb, char *base,
+						unsigned long int base_size);
+int					sort_format(const char format, va_list args);
 
 #endif
